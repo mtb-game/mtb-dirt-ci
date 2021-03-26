@@ -1,0 +1,38 @@
+kind: pipeline
+type: docker
+name: docker
+
+clone:
+  disable: true
+
+steps:
+  - name: clone
+    image: alpine/git
+    commands:
+      - git config --global init.defaultBranch main
+      - git init mtb-dirt
+      - cd mtb-dirt
+      - git config pull.rebase false
+      - git remote add origin https://github.com/loeffel-io/mtb-dirt.git
+      - git config core.sparsecheckout true
+      - echo "Assets/Src/*" >> .git/info/sparse-checkout
+      - echo "Assets/.ls-lint.yml" >> .git/info/sparse-checkout
+      - echo "Assets/Makefile" >> .git/info/sparse-checkout
+      - git pull origin main
+
+  - name: ls-lint
+    image: byrnedo/alpine-curl
+    commands:
+      - cd mtb-dirt/Assets
+      - curl -sL -o ls-lint https://github.com/loeffel-io/ls-lint/releases/download/v1.9.2/ls-lint-linux && chmod +x ls-lint && ./ls-lint
+
+  - name: resharper
+    image: mcr.microsoft.com/dotnet/sdk:3.1
+    commands:
+      - apt-get update
+      - apt-get install -y wget unzip
+      - wget -q -O ./resharper.zip https://download.jetbrains.com/resharper/dotUltimate.2020.3.4/JetBrains.ReSharper.CommandLineTools.2020.3.4.zip?_ga=2.186593961.1838134845.1615996636-1227764357.1614520489
+      - unzip -q ./resharper.zip
+      - (cd mtb-dirt && dotnet new sln)
+      - ls -al mtb-dirt
+      - ./inspectcode.sh mtb-dirt/mtb-dirt.sln
