@@ -1,2 +1,1 @@
-# mtb-dirt-ci
-MTB Dirt CI
+# MTB Dirt CI
