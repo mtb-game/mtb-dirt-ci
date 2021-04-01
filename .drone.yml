@@ -18,7 +18,7 @@ steps:
       - git init mtb-dirt
       - cd mtb-dirt
       - git config pull.rebase false
-      - git remote add origin https://github.com/loeffel-io/mtb-dirt.git
+      - git remote add origin git@github.com:loeffel-io/mtb-dirt.git
       - git config core.sparsecheckout true
       - echo "Assets/Src/*" >> .git/info/sparse-checkout
       - echo "Assets/.ls-lint.yml" >> .git/info/sparse-checkout
