@@ -39,4 +39,4 @@ steps:
   - name: solution
     image: unityci/editor:ubuntu-2020.3.1f1-linux-il2cpp-0.11.0
     commands:
-      - echo "peter"
+      - unity-editor help
