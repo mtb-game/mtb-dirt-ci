@@ -24,7 +24,8 @@ steps:
       - echo "Assets/Src/*" >> .git/info/sparse-checkout
       - echo "Assets/.ls-lint.yml" >> .git/info/sparse-checkout
       - echo "Assets/Makefile" >> .git/info/sparse-checkout
-      - git pull origin main
+      - git fetch git@github.com:loeffel-io/mtb-dirt.git $SOURCE_HASH
+      - git checkout FETCH_HEAD
 
   - name: ls-lint
     image: byrnedo/alpine-curl
