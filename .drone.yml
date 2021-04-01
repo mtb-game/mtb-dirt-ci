@@ -38,6 +38,11 @@ steps:
 
   - name: solution
     image: unityci/editor:ubuntu-2020.3.1f1-linux-il2cpp-0.11.0
+    environment:
+      UNITY_USERNAME:
+        from_secret: UNITY_USERNAME
+      UNITY_PASSWORD:
+        from_secret: UNITY_PASSWORD
     commands:
-      - /opt/unity/Editor/Unity -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
+      - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
 
