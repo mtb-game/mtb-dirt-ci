@@ -11,11 +11,10 @@ steps:
     environment:
       SSH_KEY:
         from_secret: SSH_KEY
-      SOURCE_HASH:
-        from_secret: SOURCE_HASH
     commands:
       - env
-      - echo "$SOURCE_HASH"
+      - echo $SOURCE_HASH
+      - echo ${SOURCE_HASH}
       - apk add openssh
       - mkdir -p $HOME/.ssh && echo "$SSH_KEY" > $HOME/.ssh/id_rsa && chmod 0600 $HOME/.ssh/id_rsa
       - ssh-keyscan github.com > $HOME/.ssh/known_hosts
