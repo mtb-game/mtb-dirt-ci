@@ -39,4 +39,8 @@ steps:
   - name: solution
     image: unityci/editor:ubuntu-2020.3.1f1-linux-il2cpp-0.11.0
     commands:
-      - unity-editor help
+      - xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' \
+/opt/Unity/Editor/Unity \
+-logFile \
+-batchmode \
+-username "$UNITY_USERNAME" -password "$UNITY_PASSWORD"
