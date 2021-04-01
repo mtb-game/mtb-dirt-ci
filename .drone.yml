@@ -35,3 +35,8 @@ steps:
     commands:
       - cd mtb-dirt/Assets
       - curl -sL -o ls-lint https://github.com/loeffel-io/ls-lint/releases/download/v1.9.2/ls-lint-linux && chmod +x ls-lint && ./ls-lint
+
+  - name: solution
+    image: unityci/editor:ubuntu-2020.3.1f1-linux-il2cpp-0.11.0
+    commands:
+      - echo "peter"
