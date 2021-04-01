@@ -13,12 +13,13 @@ steps:
         from_secret: SSH_KEY
     commands:
       - apk add openssh
-      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
+      - mkdir -p $HOME/.ssh && echo "$SSH_KEY" > $HOME/.ssh/id_rsa && chmod 0600 $HOME/.ssh/id_rsa
+      - ssh-keyscan github.com > $HOME/.ssh/known_hosts
       - git config --global init.defaultBranch main
       - git init mtb-dirt
       - cd mtb-dirt
       - git config pull.rebase false
-      - git remote add origin ssh://git@github.com:loeffel-io/mtb-dirt.git
+      - git remote add origin git@github.com:loeffel-io/mtb-dirt.git
       - git config core.sparsecheckout true
       - echo "Assets/Src/*" >> .git/info/sparse-checkout
       - echo "Assets/.ls-lint.yml" >> .git/info/sparse-checkout
