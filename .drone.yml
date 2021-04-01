@@ -12,6 +12,7 @@ steps:
       SSH_KEY:
         from_secret: SSH_KEY
       SOURCE_HASH:
+        from_secret: SOURCE_HASH
     commands:
       - env
       - echo "$SOURCE_HASH"
