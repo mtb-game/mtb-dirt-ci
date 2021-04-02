@@ -46,7 +46,7 @@ steps:
       UNITY_LICENSE:
         from_secret: UNITY_LICENSE
     commands:
-      - mkdir -p $HOME/.local/share/unity3d/Unity && echo "$UNITY_LICENSE" > $HOME/.local/share/unity3d/Unity/Unity_v2020.x.ulf
+      - mkdir -p $HOME/.local/share/unity3d/Unity && echo "$UNITY_LICENSE" > $HOME/.local/share/unity3d/unity/Unity_v2020.x.ulf
       # - /opt/unity/Editor/Unity -batchmode -nographics -manualActivation -logFile /dev/stdout -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD"
       - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
 
