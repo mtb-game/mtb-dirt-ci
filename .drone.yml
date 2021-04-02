@@ -23,6 +23,7 @@ steps:
       - git config pull.rebase false
       - git remote add origin git@github.com:loeffel-io/mtb-dirt.git
       - git config core.sparsecheckout true
+      - echo "Assets/Imports" >> .git/info/sparse-checkout
       - echo "Assets/Src/*" >> .git/info/sparse-checkout
       - echo "Assets/.ls-lint.yml" >> .git/info/sparse-checkout
       - echo "Assets/Makefile" >> .git/info/sparse-checkout
@@ -54,5 +55,5 @@ steps:
       
       # - /opt/unity/Editor/Unity -batchmode -nographics -manualActivation -logFile /dev/stdout -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD".,
       # - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -manualLicenseFile $HOME/Unity_v2020.x.ulf -logFile
-      - /opt/unity/Editor/Unity -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
+      - /opt/unity/Editor/Unity -batchmode -nographics -importPackage -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
 
