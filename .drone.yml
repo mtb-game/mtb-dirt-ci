@@ -48,5 +48,6 @@ steps:
     commands:
       - echo "$UNITY_LICENSE" > $HOME/Unity_v2020.x.ulf
       # - /opt/unity/Editor/Unity -batchmode -nographics -manualActivation -logFile /dev/stdout -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD".,
-      - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -manualLicenseFile $HOME/Unity_v2020.x.ulf -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath .
+      - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -manualLicenseFile $HOME/Unity_v2020.x.ulf -logFile
+      - /opt/unity/Editor/Unity -batchmode -nographics -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
 
