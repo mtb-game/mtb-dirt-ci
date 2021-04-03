@@ -20,7 +20,7 @@ steps:
       - cd $DRONE_WORKSPACE/mtb-dirt
       - git config pull.rebase false
       - git remote add origin git@github.com:loeffel-io/mtb-dirt.git
-      - git pull origin main
+      - git checkout $SOURCE_HASH
       
   - name: ls-lint
     image: byrnedo/alpine-curl
