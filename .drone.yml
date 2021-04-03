@@ -17,6 +17,7 @@ steps:
       DRONE_COMMIT_BRANCH: ${DOWNSTREAM_DRONE_COMMIT_BRANCH}
       DRONE_COMMIT_REF: ${DOWNSTREAM_DRONE_COMMIT_REF}
     commands:
+      - env
       - /usr/local/bin/clone
       
   - name: ls-lint
