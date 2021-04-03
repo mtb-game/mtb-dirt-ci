@@ -51,7 +51,7 @@ steps:
       - mkdir -p $HOME/.local/share/unity3d/Unity/
       - echo 'Writing $UNITY_LICENSE to license file $HOME/.local/share/unity3d/Unity/Unity_lic.ulf'
       - echo "$UNITY_LICENSE" | tr -d '\r' > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
-      - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && make sync)
+      - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make sync)
       # - /opt/unity/Editor/Unity -batchmode -nographics -manualActivation -logFile /dev/stdout -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD".,
       # - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -manualLicenseFile $HOME/Unity_v2020.x.ulf -logFile
       
