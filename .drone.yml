@@ -55,5 +55,5 @@ steps:
       
       # - /opt/unity/Editor/Unity -batchmode -nographics -manualActivation -logFile /dev/stdout -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD".,
       # - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -manualLicenseFile $HOME/Unity_v2020.x.ulf -logFile
-      - /opt/unity/Editor/Unity -batchmode -nographics -importPackage -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
+      - xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' /opt/unity/Editor/Unity -batchmode -nographics -importPackage -logFile - -executeMethod UnityEditor.SyncVS.SyncSolution -projectPath . -quit
 
