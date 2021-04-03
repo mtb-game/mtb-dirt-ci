@@ -16,8 +16,8 @@ steps:
       - mkdir -p $HOME/.ssh && echo "$SSH_KEY" > $HOME/.ssh/id_rsa && chmod 0600 $HOME/.ssh/id_rsa
       - ssh-keyscan github.com > ~/.ssh/known_hosts
       - git config --global init.defaultBranch main
-      - cd ${DRONE_WORKSPACE} && git init mtb-dirt
-      - cd ${DRONE_WORKSPACE}/mtb-dirt
+      - cd $DRONE_WORKSPACE && git init mtb-dirt
+      - cd $DRONE_WORKSPACE/mtb-dirt
       - git config pull.rebase false
       - git remote add origin git@github.com:loeffel-io/mtb-dirt.git
       - git pull origin main
@@ -25,7 +25,7 @@ steps:
   - name: ls-lint
     image: byrnedo/alpine-curl
     commands:
-      - cd ${DRONE_WORKSPACE}/mtb-dirt/Assets
+      - cd $DRONE_WORKSPACE/mtb-dirt/Assets
       - curl -sL -o ls-lint https://github.com/loeffel-io/ls-lint/releases/download/v1.9.2/ls-lint-linux && chmod +x ls-lint && ./ls-lint
 
   - name: sln
@@ -42,11 +42,11 @@ steps:
       - mkdir -p $HOME/.local/share/unity3d/Unity/
       - echo 'Writing $UNITY_LICENSE to license file $HOME/.local/share/unity3d/Unity/Unity_lic.ulf'
       - echo "$UNITY_LICENSE" | tr -d '\r' > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
-      - (cd ${DRONE_WORKSPACE}/mtb-dirt/Assets && WORKSPACE=${DRONE_WORKSPACE} make sync)
+      - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=${DRONE_WORKSPACE} make sync)
       
   - name: resharper
     image: unityci/editor:ubuntu-2020.3.2f1-linux-il2cpp-0.11.0
     commands:
-      - (cd ${DRONE_WORKSPACE}/mtb-dirt/Assets && WORKSPACE=${DRONE_WORKSPACE} make resharper-install)
-      - (cd ${DRONE_WORKSPACE}/mtb-dirt/Assets && WORKSPACE=${DRONE_WORKSPACE} make resharper-inspectcode)
+      - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=${DRONE_WORKSPACE} make resharper-install)
+      - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=${DRONE_WORKSPACE} make resharper-inspectcode)
 
