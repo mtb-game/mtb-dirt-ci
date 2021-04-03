@@ -47,13 +47,17 @@ steps:
       UNITY_LICENSE:
         from_secret: UNITY_LICENSE
     commands:
-      - cd mtb-dirt
-      - mkdir -p /root/.cache/unity3d
-      - mkdir -p /root/.local/share/unity3d/Unity/
-      - echo 'Writing $UNITY_LICENSE to license file /root/.local/share/unity3d/Unity/Unity_lic.ulf'
-      - echo "$UNITY_LICENSE" | tr -d '\r' > /root/.local/share/unity3d/Unity/Unity_lic.ulf
-      
+      - mkdir -p $HOME/.cache/unity3d
+      - mkdir -p $HOME/.local/share/unity3d/Unity/
+      - echo 'Writing $UNITY_LICENSE to license file $HOME/.local/share/unity3d/Unity/Unity_lic.ulf'
+      - echo "$UNITY_LICENSE" | tr -d '\r' > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
+      - (cd $HOME/mtb-dirt/Assets && make sync)
       # - /opt/unity/Editor/Unity -batchmode -nographics -manualActivation -logFile /dev/stdout -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD".,
       # - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -manualLicenseFile $HOME/Unity_v2020.x.ulf -logFile
-      - (cd Assets && make sync)
+      
+  - name: resharper
+    image: unityci/editor:ubuntu-2020.3.2f1-linux-il2cpp-0.11.0
+    commands:
+      - (cd $HOME/mtb-dirt/Assets && make resharper-install)
+      - (cd $HOME/mtb-dirt/Assets && make resharper-inspectcode)
 
