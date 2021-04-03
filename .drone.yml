@@ -9,7 +9,7 @@ steps:
   - name: clone
     image: drone/git
     environment:
-      SSH_KEY:
+      DRONE_SSH_KEY:
         from_secret: SSH_KEY
       DRONE_REMOTE_URL: ${DOWNSTREAM_DRONE_REMOTE_URL}
       DRONE_BUILD_EVENT: ${DOWNSTREAM_BUILD_EVENT}
