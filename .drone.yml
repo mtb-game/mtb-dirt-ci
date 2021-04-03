@@ -37,7 +37,7 @@ steps:
       - curl -sL -o ls-lint https://github.com/loeffel-io/ls-lint/releases/download/v1.9.2/ls-lint-linux && chmod +x ls-lint && ./ls-lint
 
   - name: sln
-    image: mtbgame/unity:latest
+    image: mtbgame/unity:0.1.1
     environment:
       UNITY_LICENSE:
         from_secret: UNITY_LICENSE
@@ -47,7 +47,7 @@ steps:
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make sync)
       
   - name: resharper
-    image: mtbgame/unity:latest
+    image: mtbgame/unity:0.1.1
     commands:
       - jb
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper)
