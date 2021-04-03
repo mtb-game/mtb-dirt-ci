@@ -43,12 +43,10 @@ steps:
         from_secret: UNITY_LICENSE
     commands:
       - echo "$UNITY_LICENSE" | tr -d '\r' > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
-      - $HOME/jb inspectcode
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make sync)
       
   - name: resharper
     image: mtbgame/unity:0.1.5
     commands:
-      - ./jb
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper)
 
