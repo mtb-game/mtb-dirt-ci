@@ -46,11 +46,6 @@ steps:
       UNITY_LICENSE:
         from_secret: UNITY_LICENSE
     commands:
-      - apt-get update && apt-get -y install wget
-      - wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
-      - dpkg -i packages-microsoft-prod.deb
-      - apt-get update && apt-get -y install apt-transport-https dotnet-sdk-3.1 
-      - dotnet --version
       - mkdir -p $HOME/.cache/unity3d
       - mkdir -p $HOME/.local/share/unity3d/Unity/
       - echo 'Writing $UNITY_LICENSE to license file $HOME/.local/share/unity3d/Unity/Unity_lic.ulf'
@@ -58,11 +53,13 @@ steps:
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make sync)
       
   - name: resharper
-    image: mcr.microsoft.com/dotnet/sdk:3.1
+    image: unityci/editor:ubuntu-2020.3.2f1-linux-il2cpp-0.11.0
     commands:
-      - apt-get update && apt-get -y install snapd
-      - snap install dotnet-sdk --classic --channel=3.1
-      - snap alias dotnet-sdk.dotnet dotnet
+      - apt-get update && apt-get -y install wget
+      - wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+      - dpkg -i packages-microsoft-prod.deb
+      - apt-get update && apt-get -y install apt-transport-https dotnet-sdk-3.1 
+      - dotnet --version
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper-install)
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper-inspectcode)
 
