@@ -15,11 +15,11 @@ steps:
     commands:
       - env
       - apk add openssh
-      - mkdir -p $HOME/.ssh && echo "$SSH_KEY" > $HOME/.ssh/id_rsa && chmod 0600 $HOME/.ssh/id_rsa
-      - ssh-keyscan github.com > $HOME/.ssh/known_hosts
+      - mkdir -p ~/.ssh && echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 0600 ~/.ssh/id_rsa
+      - ssh-keyscan github.com > ~/.ssh/known_hosts
       - git config --global init.defaultBranch main
-      - cd $HOME && git init mtb-dirt
-      - cd $HOME/mtb-dirt
+      - cd ~ && git init mtb-dirt
+      - cd ~/mtb-dirt
       - git config pull.rebase false
       - git remote add origin git@github.com:loeffel-io/mtb-dirt.git
       #- git config core.sparsecheckout true
@@ -34,7 +34,7 @@ steps:
   - name: ls-lint
     image: byrnedo/alpine-curl
     commands:
-      - cd $HOME/mtb-dirt/Assets
+      - cd ~/mtb-dirt/Assets
       - curl -sL -o ls-lint https://github.com/loeffel-io/ls-lint/releases/download/v1.9.2/ls-lint-linux && chmod +x ls-lint && ./ls-lint
 
   - name: sln
@@ -47,17 +47,17 @@ steps:
       UNITY_LICENSE:
         from_secret: UNITY_LICENSE
     commands:
-      - mkdir -p $HOME/.cache/unity3d
-      - mkdir -p $HOME/.local/share/unity3d/Unity/
-      - echo 'Writing $UNITY_LICENSE to license file $HOME/.local/share/unity3d/Unity/Unity_lic.ulf'
-      - echo "$UNITY_LICENSE" | tr -d '\r' > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
-      - (cd $HOME/mtb-dirt/Assets && make sync)
+      - mkdir -p ~/.cache/unity3d
+      - mkdir -p ~/.local/share/unity3d/Unity/
+      - echo 'Writing $UNITY_LICENSE to license file ~/.local/share/unity3d/Unity/Unity_lic.ulf'
+      - echo "$UNITY_LICENSE" | tr -d '\r' > ~/.local/share/unity3d/Unity/Unity_lic.ulf
+      - (cd ~/mtb-dirt/Assets && make sync)
       # - /opt/unity/Editor/Unity -batchmode -nographics -manualActivation -logFile /dev/stdout -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD".,
       # - /opt/unity/Editor/Unity -username "$UNITY_USERNAME" -password "$UNITY_PASSWORD" -batchmode -nographics -manualLicenseFile $HOME/Unity_v2020.x.ulf -logFile
       
   - name: resharper
     image: unityci/editor:ubuntu-2020.3.2f1-linux-il2cpp-0.11.0
     commands:
-      - (cd $HOME/mtb-dirt/Assets && make resharper-install)
-      - (cd $HOME/mtb-dirt/Assets && make resharper-inspectcode)
+      - (cd ~/mtb-dirt/Assets && make resharper-install)
+      - (cd ~/mtb-dirt/Assets && make resharper-inspectcode)
 
