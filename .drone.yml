@@ -55,7 +55,7 @@ steps:
   - name: resharper
     image: mcr.microsoft.com/dotnet/sdk:3.1
     commands:
-      - apt-get update && apt-get install -y make
+      - apt-get update && apt-get -y install make
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper-install)
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper-inspectcode)
 
