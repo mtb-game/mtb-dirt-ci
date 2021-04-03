@@ -41,6 +41,7 @@ steps:
   - name: resharper
     image: unityci/editor:ubuntu-2020.3.2f1-linux-il2cpp-0.11.0
     commands:
+      - export PATH=/usr/local/share/dotnet:$PATH
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper-install)
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper-inspectcode)
 
