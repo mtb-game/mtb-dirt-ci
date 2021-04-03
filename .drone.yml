@@ -52,6 +52,7 @@ steps:
       - apt-get update && apt-get -y install apt-transport-https dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1
       - dotnet --version
       - dotnet tool install --global JetBrains.ReSharper.GlobalTools --version 2020.3.4
+      - jb
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper)
       - mkdir -p $HOME/.cache/unity3d
       - mkdir -p $HOME/.local/share/unity3d/Unity/
