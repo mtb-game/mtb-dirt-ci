@@ -9,12 +9,12 @@ steps:
   - name: clone
     image: drone/git
     environment:
-      SSH_KEY:
+      DRONE_SSH_KEY:
         from_secret: SSH_KEY
       DRONE_REMOTE_URL: ${DOWNSTREAM_DRONE_REMOTE_URL}
       DRONE_BUILD_EVENT: ${DOWNSTREAM_BUILD_EVENT}
-      DOWNSTREAM_DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
-      DOWNSTREAM_DRONE_COMMIT_BRANCH: ${DRONE_COMMIT_BRANCH}
+      DRONE_COMMIT_SHA: ${DOWNSTREAM_DRONE_COMMIT_SHA}
+      DRONE_COMMIT_BRANCH: ${DOWNSTREAM_DRONE_COMMIT_BRANCH}
       
   - name: ls-lint
     image: byrnedo/alpine-curl
