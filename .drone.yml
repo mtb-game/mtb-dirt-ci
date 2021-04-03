@@ -7,22 +7,15 @@ clone:
 
 steps:
   - name: clone
-    image: alpine/git
+    image: drone/git
     environment:
-      SSH_KEY:
+      DRONE_SSH_KEY:
         from_secret: SSH_KEY
       SOURCE_HASH:
       DRONE_REMOTE_URL: ${DOWNSTREAM_DRONE_REMOTE_URL}
-    commands:
-      - echo $DRONE_REMOTE_URL
-      - mkdir -p $HOME/.ssh && echo "$SSH_KEY" > $HOME/.ssh/id_rsa && chmod 0600 $HOME/.ssh/id_rsa
-      - ssh-keyscan github.com > ~/.ssh/known_hosts
-      - git config --global init.defaultBranch main
-      - cd $DRONE_WORKSPACE && git init mtb-dirt
-      - cd $DRONE_WORKSPACE/mtb-dirt
-      - git config pull.rebase false
-      - git remote add origin git@github.com:loeffel-io/mtb-dirt.git
-      - git pull origin main
+      DRONE_BUILD_EVENT: ${DOWNSTREAM_BUILD_EVENT}
+      DOWNSTREAM_DRONE_COMMIT_SHA: ${DRONE_COMMIT_SHA}
+      DOWNSTREAM_DRONE_COMMIT_BRANCH: ${DRONE_COMMIT_BRANCH}
       
   - name: ls-lint
     image: byrnedo/alpine-curl
