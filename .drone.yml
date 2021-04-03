@@ -37,17 +37,17 @@ steps:
       - curl -sL -o ls-lint https://github.com/loeffel-io/ls-lint/releases/download/v1.9.2/ls-lint-linux && chmod +x ls-lint && ./ls-lint
 
   - name: sln
-    image: mtbgame/unity:0.1.4
+    image: mtbgame/unity:0.1.5
     environment:
       UNITY_LICENSE:
         from_secret: UNITY_LICENSE
     commands:
       - echo "$UNITY_LICENSE" | tr -d '\r' > $HOME/.local/share/unity3d/Unity/Unity_lic.ulf
-      - ./jb
+      - ./jb inspectcode
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make sync)
       
   - name: resharper
-    image: mtbgame/unity:0.1.4
+    image: mtbgame/unity:0.1.5
     commands:
       - ./jb
       - (cd $DRONE_WORKSPACE/mtb-dirt/Assets && WORKSPACE=$DRONE_WORKSPACE make resharper)
