@@ -46,6 +46,7 @@ steps:
       UNITY_LICENSE:
         from_secret: UNITY_LICENSE
     commands:
+      - export PATH="$PATH:$HOME/.dotnet/tools"
       - apt-get update && apt-get -y install wget
       - wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
       - dpkg -i packages-microsoft-prod.deb
