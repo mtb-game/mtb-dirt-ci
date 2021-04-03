@@ -21,7 +21,7 @@ steps:
       - env
       - mkdir -p $HOME/.ssh && echo "$SSH_KEY" > $HOME/.ssh/id_rsa && chmod 0600 $HOME/.ssh/id_rsa
       - ssh-keyscan github.com > ~/.ssh/known_hosts
-      - /usr/local/bin/clone
+      - PLUGIN_DEPTH=100 /usr/local/bin/clone
       
   - name: ls-lint
     image: byrnedo/alpine-curl
