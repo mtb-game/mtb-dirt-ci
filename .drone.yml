@@ -16,6 +16,8 @@ steps:
       DRONE_COMMIT_SHA: ${DOWNSTREAM_DRONE_COMMIT_SHA}
       DRONE_COMMIT_BRANCH: ${DOWNSTREAM_DRONE_COMMIT_BRANCH}
       DRONE_COMMIT_REF: ${DOWNSTREAM_DRONE_COMMIT_REF}
+    commands:
+      - echo "test"
       
   - name: ls-lint
     image: byrnedo/alpine-curl
